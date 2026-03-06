@@ -8,14 +8,15 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev cmake libffi-dev libssl-dev cython
-          pip3 install --user --upgrade buildozer
+          sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev cmake libffi-dev libssl-dev
+          pip3 install --upgrade pip
+          pip3 install --upgrade buildozer cython
       - name: Build with Buildozer
         run: |
-          # SDK litsenziyasini qabul qilish va buildozer ni ishga tushirish
-          buildozer android debug
+          # SDK litsenziyalarini qabul qilish va build
+          yes | buildozer android debug
         env:
-          # Litsenziya xatosini chetlab o'tish uchun
+          # Litsenziya masalalarini hal qilish uchun
           ANDROIDSDK: /usr/local/android-sdk
       - name: Upload APK
         uses: actions/upload-artifact@v4
